@@ -4,6 +4,8 @@ body {
     height: 100%;
 }
 
+
+/* Sticky Navigation Bar */
 .NavBar {
     background-color: transparent;
     display: flex;
@@ -13,9 +15,15 @@ body {
     overflow: hidden;
     text-transform: uppercase;
     text-wrap: nowrap;
-    top: 0;
-    z-index: 10;
+    background-color: transparent;
+
     height: 40px;
+    width: 100%;
+    top: 0px;
+    z-index: 10;
+    padding-top: 10px; padding-bottom: 10px;
+    animation: changeBg auto linear both;
+    animation-timeline: scroll();
 }
 
 .NavBar p {
@@ -26,15 +34,30 @@ body {
 .NavBar nav {
     margin-right: 80px;
     margin-left: 80px;
+    
 }
 
 .NavBar nav a {
+    display: inline-block;
     text-decoration: none;
     color: black;
     margin-left: 50px;
 }
 
+.NavBar nav a::before{
+    content: attr(data-text);
+    color: blue;
+    text-decoration: underline;
+    overflow: hidden;
+    position: absolute;
+    width: 0%;
+    transition: 1s;
+}
+.NavBar nav a:hover::before{
+    width: 100%;
+}
 
+/* Hero, Avatar, and Banner */
 
 .Hero {
     height: 50%;
@@ -68,7 +91,8 @@ body {
     overflow-x: scroll;
     flex-wrap: nowrap;
     justify-content: space-between;
-    font-size: x-large;
+    font-size: larger;
+    text-transform: uppercase;
     margin-left: 35%;
     width: 150px;
 }
@@ -79,27 +103,61 @@ body {
     animation: AutoScroll 10s ease-in-out infinite;
 }
 
-@keyframes AutoScroll{
+/* Pause animation on hover */
+body :has(.ScrollHoriz:hover) .ScrollHoriz a {
+    animation-play-state: paused;
+}
+
+
+/* Content */
+.MainContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 60%);
+    width: 700px;
+    padding-bottom: 80px;
+}
+
+
+/* Animations */
+
+@keyframes AutoScroll {
     0% {
         transform: translateX(-10px);
     }
 
-    20%{
+    20% {
         transform: translateX(-10px);
     }
-    40%{
-        transform: translateX(-185px);
+
+    40% {
+        transform: translateX(-180px);
     }
 
-    60%{
-        transform: translateX(calc(-185px * 2));
+    60% {
+        transform: translateX(calc(-180px * 2));
     }
 
     80% {
-        transform: translateX(calc(-185px * 3));
+        transform: translateX(calc(-180px * 3));
     }
 
-    100%{
-        transform: translateX(calc(-186px * 4));
+    100% {
+        transform: translateX(calc(-183px * 4));
+    }
+}
+
+@supports (animation-timeline: view()) {
+    @keyframes changeBg {
+        from {
+            background-color: transparent;
+            color: black;
+        }
+
+        to {
+            background-color: rgba(0, 0, 0, 0.439);
+            color: whitesmoke;
+        }
     }
 }
