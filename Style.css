@@ -76,15 +76,30 @@ body {
 .ScrollHoriz a {
     margin-right: 40px;
     margin-left: 40px;
-    animation: AutoScroll 1s infinite alternate;
+    animation: AutoScroll 10s ease-in-out infinite;
 }
 
 @keyframes AutoScroll{
     0% {
-        transform: translateX(0px);
+        transform: translateX(-10px);
     }
 
-    100% {
-        transform: translateX((2000px))
+    20%{
+        transform: translateX(-10px);
+    }
+    40%{
+        transform: translateX(-185px);
+    }
+
+    60%{
+        transform: translateX(calc(-185px * 2));
+    }
+
+    80% {
+        transform: translateX(calc(-185px * 3));
+    }
+
+    100%{
+        transform: translateX(calc(-186px * 4));
     }
 }
